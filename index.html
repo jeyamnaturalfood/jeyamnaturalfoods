@@ -15,8 +15,6 @@
       --bg-deep: #020d07;
       --bg-soft: #02170b;
       --accent: #22c55e;
-      --accent-soft: rgba(34, 197, 94, 0.18);
-      --accent-strong: #16a34a;
       --text-main: #ecfdf3;
       --text-muted: #9fb5a1;
     }
@@ -39,73 +37,74 @@
       align-items: stretch;
       justify-content: center;
       padding: clamp(18px, 5vw, 32px);
-      overflow: hidden;
+      overflow-x: hidden; /* prevent horizontal scroll shake */
       position: relative;
     }
 
-    /* big soft animated blob */
+    /* big soft animated blob (subtle, to avoid shake) */
     .blob {
       position: absolute;
-      width: 520px;
-      height: 520px;
+      width: 420px;
+      height: 420px;
       border-radius: 60% 40% 55% 45%;
       background:
         radial-gradient(circle at 20% 20%, rgba(190, 242, 100, 0.6), transparent 60%),
         radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.9), transparent 60%);
-      opacity: 0.22;
+      opacity: 0.2;
       filter: blur(22px);
-      animation: blobMove 18s ease-in-out infinite alternate;
+      animation: blobMove 26s ease-in-out infinite alternate;
       pointer-events: none;
     }
 
     @keyframes blobMove {
       0% {
-        transform: translate3d(-18%, -10%, 0) scale(1);
+        transform: translate3d(-8%, -4%, 0) scale(1);
       }
       50% {
-        transform: translate3d(12%, 18%, 0) scale(1.06) rotate(3deg);
+        transform: translate3d(6%, 10%, 0) scale(1.03) rotate(1deg);
       }
       100% {
-        transform: translate3d(22%, -6%, 0) scale(1.02) rotate(-3deg);
+        transform: translate3d(10%, -2%, 0) scale(1.01) rotate(-1deg);
       }
     }
 
-    /* floating seeds/leaves */
+    /* floating seeds/leaves (very soft, long duration) */
     .particle {
       position: absolute;
       width: 8px;
       height: 14px;
       border-radius: 999px;
-      border: 1px solid rgba(190, 242, 100, 0.55);
+      border: 1px solid rgba(190, 242, 100, 0.5);
       background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
-      opacity: 0.35;
-      animation: floatUp 16s linear infinite;
+      opacity: 0.3;
+      animation: floatUp 22s linear infinite;
       transform-origin: center;
     }
 
-    .particle:nth-child(2) { left: 10%; bottom: -40px; animation-delay: 0s; }
-    .particle:nth-child(3) { left: 28%; bottom: -60px; animation-delay: 3s; }
-    .particle:nth-child(4) { right: 24%; bottom: -50px; animation-delay: 6s; }
-    .particle:nth-child(5) { right: 6%; bottom: -70px; animation-delay: 9s; }
+    .particle:nth-child(2) { left: 10%; bottom: -30px; animation-delay: 0s; }
+    .particle:nth-child(3) { left: 28%; bottom: -40px; animation-delay: 5s; }
+    .particle:nth-child(4) { right: 24%; bottom: -35px; animation-delay: 10s; }
+    .particle:nth-child(5) { right: 6%; bottom: -50px; animation-delay: 15s; }
 
     @keyframes floatUp {
       0% {
-        transform: translate3d(0, 0, 0) rotate(0deg);
+        transform: translate3d(0, 10vh, 0);
         opacity: 0;
       }
-      10% {
+      15% {
         opacity: 0.4;
       }
       50% {
-        transform: translate3d(-6px, -55vh, 0) rotate(-12deg);
-        opacity: 0.9;
+        transform: translate3d(-4px, -30vh, 0);
+        opacity: 0.8;
       }
       100% {
-        transform: translate3d(8px, -110vh, 0) rotate(8deg);
+        transform: translate3d(4px, -60vh, 0);
         opacity: 0;
       }
     }
 
+    /* layout */
     .layout {
       position: relative;
       z-index: 1;
@@ -115,13 +114,6 @@
       grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
       gap: clamp(24px, 7vw, 60px);
       align-items: center;
-    }
-
-    @media (max-width: 840px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-        align-items: flex-start;
-      }
     }
 
     .left {
@@ -225,19 +217,12 @@
       background: linear-gradient(90deg, rgba(34, 197, 94, 0.1), rgba(190, 242, 100, 0.85), rgba(34, 197, 94, 0.1));
       transform-origin: left;
       transform: scaleX(0);
-      animation: underlineGrow 1s ease-out 0.4s forwards;
+      animation: underlineGrow 1s ease-out 0.5s forwards;
     }
 
     @keyframes underlineGrow {
       from { transform: scaleX(0); }
       to { transform: scaleX(1); }
-    }
-
-    .subtitle {
-      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-      color: var(--text-muted);
-      max-width: 34rem;
-      margin-bottom: 18px;
     }
 
     .highlight-note {
@@ -279,7 +264,7 @@
       background: linear-gradient(90deg, #bbf7d0, #22c55e, #bbf7d0);
       width: 40%;
       border-radius: 999px;
-      animation: loading 2.3s ease-in-out infinite;
+      animation: loading 2.6s ease-in-out infinite;
     }
 
     @keyframes loading {
@@ -287,10 +272,10 @@
         transform: translateX(-60%);
       }
       50% {
-        transform: translateX(10%);
+        transform: translateX(5%);
       }
       100% {
-        transform: translateX(130%);
+        transform: translateX(120%);
       }
     }
 
@@ -343,7 +328,7 @@
       height: 86%;
       border-radius: 50%;
       border: 1px dashed rgba(187, 247, 208, 0.55);
-      animation: spin 22s linear infinite;
+      animation: spin 26s linear infinite;
     }
 
     .hero-dot {
@@ -388,28 +373,105 @@
       opacity: 0.9;
     }
 
-    @media (max-width: 840px) {
-      body {
-        align-items: flex-start;
+    /* ========= RESPONSIVE ========= */
+
+    /* Tablet & small laptops */
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
       }
+
       .right {
-        justify-content: flex-start;
+        order: -1;
+        justify-content: center;
       }
+
       .hero-mark {
-        margin-top: 4px;
+        margin-bottom: 8px;
+      }
+
+      .left {
+        max-width: 100%;
       }
     }
 
-    @media (max-width: 520px) {
+    /* Mobile: center alignment */
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 28px;
+      }
+
+      .left {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       .brand-row {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        gap: 8px;
       }
+
       .pill {
-        align-self: flex-start;
+        align-self: center;
       }
+
+      .title {
+        font-size: 1.9rem;
+        text-align: center;
+      }
+
+      .highlight-note {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .progress {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .progress-label {
+        text-align: center;
+      }
+
+      .footer-line {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
       .hero-mark {
-        align-self: flex-start;
+        width: 190px;
+        height: 190px;
+        margin: 0 auto 4px;
+      }
+
+      .right {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .blob,
+      .particle,
+      .hero-ring,
+      .bar-fill,
+      .dot {
+        animation: none !important;
       }
     }
   </style>
@@ -445,12 +507,6 @@
         </span>
         for you.
       </h1>
-
-      <!-- <p class="subtitle">
-        The JEYAM NATURAL FOODS website is getting a clean, green redesign. 
-        We’ll be back very soon with a smoother way to explore our 100% natural, 
-        honest food products.
-      </p> -->
 
       <div class="highlight-note">
         <span class="seed">🌱</span>
