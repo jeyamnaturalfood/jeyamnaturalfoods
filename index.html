@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JEYAM NATURAL FOODS – We’ll be back soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #020d07;
+      --bg-soft: #02170b;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.18);
+      --accent-strong: #16a34a;
+      --text-main: #ecfdf3;
+      --text-muted: #9fb5a1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(74, 222, 128, 0.18) 0, transparent 55%),
+        radial-gradient(circle at bottom right, rgba(22, 163, 74, 0.26) 0, transparent 55%),
+        linear-gradient(135deg, var(--bg-deep), var(--bg-soft));
+      color: var(--text-main);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: clamp(18px, 5vw, 32px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* big soft animated blob */
+    .blob {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 60% 40% 55% 45%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(190, 242, 100, 0.6), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.9), transparent 60%);
+      opacity: 0.22;
+      filter: blur(22px);
+      animation: blobMove 18s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes blobMove {
+      0% {
+        transform: translate3d(-18%, -10%, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(12%, 18%, 0) scale(1.06) rotate(3deg);
+      }
+      100% {
+        transform: translate3d(22%, -6%, 0) scale(1.02) rotate(-3deg);
+      }
+    }
+
+    /* floating seeds/leaves */
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(190, 242, 100, 0.55);
+      background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+      opacity: 0.35;
+      animation: floatUp 16s linear infinite;
+      transform-origin: center;
+    }
+
+    .particle:nth-child(2) { left: 10%; bottom: -40px; animation-delay: 0s; }
+    .particle:nth-child(3) { left: 28%; bottom: -60px; animation-delay: 3s; }
+    .particle:nth-child(4) { right: 24%; bottom: -50px; animation-delay: 6s; }
+    .particle:nth-child(5) { right: 6%; bottom: -70px; animation-delay: 9s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.4;
+      }
+      50% {
+        transform: translate3d(-6px, -55vh, 0) rotate(-12deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate3d(8px, -110vh, 0) rotate(8deg);
+        opacity: 0;
+      }
+    }
+
+    .layout {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: clamp(24px, 7vw, 60px);
+      align-items: center;
+    }
+
+    @media (max-width: 840px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: flex-start;
+      }
+    }
+
+    .left {
+      max-width: 640px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: clamp(18px, 3vw, 24px);
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(187, 247, 208, 0.6);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      background: radial-gradient(circle at 30% 20%, rgba(190, 242, 100, 0.9), rgba(22, 163, 74, 0.9));
+      color: #052e16;
+      box-shadow: 0 0 0 1px rgba(21, 128, 61, 0.6);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(74, 222, 128, 0.45);
+      background: rgba(3, 24, 13, 0.9);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        transform: scale(1);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+        transform: scale(1.05);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        transform: scale(1);
+      }
+    }
+
+    .title {
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .accent-text {
+      background: linear-gradient(120deg, #bbf7d0, var(--accent), #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+      position: relative;
+      display: inline-block;
+    }
+
+    .accent-underline {
+      position: absolute;
+      left: 4%;
+      right: 20%;
+      bottom: -3px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(34, 197, 94, 0.1), rgba(190, 242, 100, 0.85), rgba(34, 197, 94, 0.1));
+      transform-origin: left;
+      transform: scaleX(0);
+      animation: underlineGrow 1s ease-out 0.4s forwards;
+    }
+
+    @keyframes underlineGrow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .subtitle {
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      color: var(--text-muted);
+      max-width: 34rem;
+      margin-bottom: 18px;
+    }
+
+    .highlight-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(22, 101, 52, 0.55);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      font-size: 0.8rem;
+      color: #dcfce7;
+      margin-bottom: 18px;
+    }
+
+    .seed {
+      font-size: 0.9rem;
+    }
+
+    .progress {
+      max-width: 260px;
+      width: 100%;
+      margin-top: 4px;
+      margin-bottom: 10px;
+    }
+
+    .bar {
+      position: relative;
+      width: 100%;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(21, 128, 61, 0.4);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #bbf7d0, #22c55e, #bbf7d0);
+      width: 40%;
+      border-radius: 999px;
+      animation: loading 2.3s ease-in-out infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: translateX(-60%);
+      }
+      50% {
+        transform: translateX(10%);
+      }
+      100% {
+        transform: translateX(130%);
+      }
+    }
+
+    .progress-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .footer-line {
+      margin-top: clamp(22px, 4vw, 32px);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .footer-line strong {
+      color: #bbf7d0;
+      font-weight: 500;
+    }
+
+    .right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-mark {
+      width: clamp(180px, 40vw, 260px);
+      height: clamp(180px, 40vw, 260px);
+      border-radius: 50%;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(circle at 20% 20%, rgba(190, 242, 100, 0.3), rgba(6, 78, 59, 0.8));
+      box-shadow:
+        0 0 0 1px rgba(22, 101, 52, 0.7),
+        0 25px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .hero-ring {
+      position: absolute;
+      width: 86%;
+      height: 86%;
+      border-radius: 50%;
+      border: 1px dashed rgba(187, 247, 208, 0.55);
+      animation: spin 22s linear infinite;
+    }
+
+    .hero-dot {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #bbf7d0;
+      transform: translateX(-50%);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-text-main {
+      text-align: center;
+      padding: 0 18px;
+    }
+
+    .hero-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #dcfce7;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .hero-sub {
+      font-size: 0.8rem;
+      color: #d1fae5;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 840px) {
+      body {
+        align-items: flex-start;
+      }
+      .right {
+        justify-content: flex-start;
+      }
+      .hero-mark {
+        margin-top: 4px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .pill {
+        align-self: flex-start;
+      }
+      .hero-mark {
+        align-self: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob"></div>
+
+  <!-- floating organic particles (seeds/leaves) -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <div class="layout">
+    <!-- LEFT: main message -->
+    <section class="left">
+      <div class="brand-row">
+        <div class="brand">
+          <div class="brand-mark">J</div>
+          <span>JEYAM NATURAL FOODS</span>
+        </div>
+        <div class="pill">
+          <span class="dot"></span>
+          <span>Website under maintenance</span>
+        </div>
+      </div>
+
+      <h1 class="title">
+        We’re preparing a
+        <span class="accent-text">
+          fresher Website
+          <span class="accent-underline"></span>
+        </span>
+        for you.
+      </h1>
+
+      <!-- <p class="subtitle">
+        The JEYAM NATURAL FOODS website is getting a clean, green redesign. 
+        We’ll be back very soon with a smoother way to explore our 100% natural, 
+        honest food products.
+      </p> -->
+
+      <div class="highlight-note">
+        <span class="seed">🌱</span>
+        <span>Pure ingredients. No shortcuts. Just a better experience coming soon.</span>
+      </div>
+
+      <div class="progress">
+        <div class="bar">
+          <div class="bar-fill"></div>
+        </div>
+        <div class="progress-label">Maintenance in progress</div>
+      </div>
+
+      <div class="footer-line">
+        <span>Thank you for your patience.</span>
+        <span><strong>JEYAM NATURAL FOODS</strong> will be back online shortly.</span>
+      </div>
+    </section>
+
+    <!-- RIGHT: animated brand visual -->
+    <section class="right" aria-hidden="true">
+      <div class="hero-mark">
+        <div class="hero-ring">
+          <div class="hero-dot"></div>
+        </div>
+        <div class="hero-text-main">
+          <div class="hero-label">100% natural foods</div>
+          <div class="hero-title">JEYAM NATURAL FOODS</div>
+          <div class="hero-sub">Fresh look. Same trusted purity.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
